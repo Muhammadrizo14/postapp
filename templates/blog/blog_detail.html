@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+
+    {{ blog.title }}
+
+{% endblock %}
+{% block content %}
+
+
+
+    {% include 'inc/banner.html' %}
+
+
+
+    <section class="blog-posts grid-system">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="all-blog-posts">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="blog-post">
+                                    <div class="blog-thumb">
+                                        <img src="{{ blog.photo.url }}" alt="">
+                                    </div>
+                                    <div class="down-content">
+                                        <span>{{ blog.category }}</span>
+                                        <h4>{{ blog.title }}</h4>
+                                        <ul class="post-info">
+                                            <li><a href="#">{{ blog.author }}</a></li>
+                                            <li><a href="#">{{ blog.created_at }}</a></li>
+                                            <br>
+                                            <li>
+                                                {% if blog.tag.exists %}
+                                                    <span>
+                                                Tags
+                                            </span>
+                                                    {% for tags in blog.tag.all %}
+                                                        <a href="#">{{ tags.title }}, </a>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </li>
+                                        </ul>
+                                        <p>
+                                            {{ blog.content|safe }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

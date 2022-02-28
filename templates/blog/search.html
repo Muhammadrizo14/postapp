@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="TemplateMo">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
+          rel="stylesheet">
+
+    <title>{% block title %} Blog {% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static '/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static '/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static '/css/templatemo-stand-blog.css' %}">
+
+</head>
+
+<body>
+{% include 'inc/_nav.html' %}
+{% include 'inc/banner.html' %}
+<section class="blog-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="all-blog-posts">
+                    <div class="row">
+                        {% for post in posts %}
+                            <a href="{{ post.get_absolute_url }}">
+                                <div class="col-lg-6">
+                                    <div class="blog-post">
+                                        <div class="blog-thumb">
+                                            <img src="{{ post.photo.url }}" width="730px" height="410px" alt="">
+                                        </div>
+                                        <div class="down-content">
+                                            <span>{{ post.category }}</span>
+                                            <h4>{{ post.title }}</h4>
+                                            <ul class="post-info">
+                                                <li><a href="#">{{ post.author }}</a></li>
+                                                <li><a href="#">{{ post.created_at }}</a></li>
+                                                <li><a href="#">12 Comments</a></li>
+                                            </ul>
+                                            <p>Stand Blog is a free HTML CSS template for your CMS theme. You can easily
+                                                adapt or customize it for any kind of CMS or website builder. You are
+                                                allowed to use it for your business. You are NOT allowed to
+                                                re-distribute
+                                                the template ZIP file on any template collection site for the download
+                                                purpose. <a rel="nofollow" href="https://templatemo.com/contact"
+                                                            target="_parent">Contact TemplateMo</a> for more info. Thank
+                                                you.</p>
+                                            <div class="post-options">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-tags"></i></li>
+                                                            <li><a href="#">Beauty</a>,</li>
+                                                            <li><a href="#">Nature</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <ul class="post-share">
+                                                            <li><i class="fa fa-share-alt"></i></li>
+                                                            <li><a href="#">Facebook</a>,</li>
+                                                            <li><a href="#"> Twitter</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% empty %}
+                            <div class="col-md-6">
+                                <h1>Тут пака нету </h1>
+                            </div>
+                            {% include 'inc/list.html' %}
+                        {% endfor %}
+                        <div class="col-lg-12">
+                            <ul class="page-numbers">
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                        {% if page_obj.number|add:'-3' > 1 %}
+                                            <li class="pagination__item">
+                                                <a href="?{{ genre }}{{ year }}page=1">1</a>
+                                            </li>
+                                        {% endif %}
+                                        {% if page_obj.number|add:'-3' >= 3 %}
+                                            <li class="pagination__item pagination__item--dots">
+                                                <a href="?
+                                                        {{ genre }}{{ year }}page={{ page_obj.previous_page_number|add:'-3' }}">
+                                                    <span class="pagination__link">• • •</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if paginator.page_range|length > 1 %}
+                                        {% for i in paginator.page_range %}
+                                            {% if page_obj.number == i %}
+                                                <li class="pagination__item active">
+                                                    <a class="pagination__link" href="#">{{ i }}</a>
+                                                </li>
+                                            {% elif i > page_obj.number|add:'-4' and i < page_obj.number|add:'4' %}
+                                                <li class="pagination__item">
+                                                    <a class="pagination__link"
+                                                       href="?{{ s }}{{ genre }}{{ year }}page={{ i }}">{{ i }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if page_obj.has_next %}
+                                        {% if page_obj.number|add:'4' < page_obj.paginator.num_pages %}
+                                            <li class="pagination__item pagination__item--dots">
+                                                <a href="?
+                                                        {{ genre }}{{ year }}page={{ page_obj.next_page_number|add:'3' }}">
+                                                    <span class="pagination__link">• • •</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        {% if page_obj.number|add:'3' < page_obj.paginator.num_pages %}
+                                            <li class="pagination__item">
+                                                <a class="pagination__link"
+                                                   href="?{{ genre }}{{ year }}page={{ page_obj.paginator.num_pages }}">
+                                                    {{ page_obj.paginator.num_pages }}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+                                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="{% static '/jquery/jquery.min.js' %}"></script>
+<script src="{% static '/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Additional Scripts -->
+<script src="{% static '/js/owl.js' %}"></script>
+<script src="{% static '/js/slick.js' %}"></script>
+<script src="{% static '/js/custom.js' %}"></script>
+<script src="{% static '/js/isotope.js' %}"></script>
+<script src="{% static '/js/accordions.js' %}"></script>
+
+<script language="text/Javascript">
+    cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+    function clearField(t) {                   //declaring the array outside of the
+        if (!cleared[t.id]) {                      // function makes it static and global
+            cleared[t.id] = 1;  // you could use true and false, but that's more typing
+            t.value = '';         // with more chance of typos
+            t.style.color = '#fff';
+        }
+    }
+</script>
+
+</body>
+</html>
