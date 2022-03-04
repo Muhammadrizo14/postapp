@@ -1,26 +1,35 @@
 {% extends 'base.html' %}
+
+
 {% block content %}
-<div class="container">
-    <h1 style='padding: 117px 0px 55px 0px; text-align: center'>{{ title }}</h1>
 
-    <form action="{% url 'add_post' %}" method="post" enctype="multipart/form-data">
-        <div class="row">
-            {% csrf_token %}
 
-            <div class="form-error">{{ form.non_field_errors }}</div>
 
-            {% for f in form %}
-                <div class="col-md-6">
-{#                    <label class="form-label" for="{{ f.id_for_label }}">{{ <f></f>abel }}: </label>#}
-                    {{ f }}
+    {% if request.user.is_authenticated %}
+        <div class="container">
+            <h1 style='padding: 117px 0px 55px 0px; text-align: center'>{{ title }}</h1>
+
+            <form action="{% url 'add_post' %}" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    {% csrf_token %}
+
+                    <div class="form-error">{{ form.non_field_errors }}</div>
+
+                    {% for f in form %}
+                        <div class="col-md-6">
+                            {{ f }}
+                        </div>
+                    {% endfor %}
+
+
                 </div>
-            {% endfor %}
+                <button type="submit" class="default form__button" style="margin-top: 50px">Добавить</button>
 
-
+            </form>
         </div>
-        <button type="submit" class="default form__button" style="margin-top: 50px">Добавить</button>
-
-    </form>
-</div>
+    {% else %}
+        <h1 style="padding-top: 238px;">You must <a href="{% url 'login' %}">login</a></h1>
+    {% endif %}
 {% endblock %}
+
 

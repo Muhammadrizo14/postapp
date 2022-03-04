@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from PIL import Image
 
 
 class Tag(models.Model):
@@ -8,7 +9,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
-
 
     def get_absolute_url(self):
         return reverse("tag", kwargs={"slug": self.slug})
@@ -20,8 +20,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
-
-
 
     def get_absolute_url(self):
         return reverse("category", kwargs={"slug": self.slug})
@@ -45,7 +43,6 @@ class Blog(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-
 
 
 class Reviews(models.Model):

@@ -18,7 +18,7 @@
                 {% for item in post__list  %}
                   <li>
                     <a href="{{ item.get_absolute_url }}">
-                      <h5>{{item.title}}</h5>
+                      <h5>{{item.title|truncatewords:5 }}</h5>
                     </a>
                     <span>{{item.created_at}}</span>
                   </li>

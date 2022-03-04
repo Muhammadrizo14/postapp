@@ -48,14 +48,7 @@
                                                 <li><a href="#">{{ post.created_at }}</a></li>
                                                 <li><a href="#">12 Comments</a></li>
                                             </ul>
-                                            <p>Stand Blog is a free HTML CSS template for your CMS theme. You can easily
-                                                adapt or customize it for any kind of CMS or website builder. You are
-                                                allowed to use it for your business. You are NOT allowed to
-                                                re-distribute
-                                                the template ZIP file on any template collection site for the download
-                                                purpose. <a rel="nofollow" href="https://templatemo.com/contact"
-                                                            target="_parent">Contact TemplateMo</a> for more info. Thank
-                                                you.</p>
+                                            {{ post.content|safe|truncatewords:17 }}
                                             <div class="post-options">
                                                 <div class="row">
                                                     <div class="col-6">

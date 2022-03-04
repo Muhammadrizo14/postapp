@@ -8,6 +8,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
     path('', include('blog.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),  # <-- here
 ]
 
 

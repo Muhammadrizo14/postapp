@@ -6,6 +6,10 @@ from django.contrib.auth import login, logout
 
 from .forms import *
 
+def profile(request):
+    return render(request, 'blog/profile.html')
+
+
 
 # user login
 
@@ -168,39 +172,3 @@ class BlogByTag(ListView):
         context['categories'] = Category.objects.all()
         context['tags'] = Tag.objects.all()
         return context
-
-# def contact(request):
-#     if request.method == "POST":
-#         message_name = request.POST['message-name']
-#         message_email = request.POST['message-email']
-#         message = request.POST['message']
-#
-#         send_mail(
-#             message_name,
-#             message,
-#             message_email,
-#             ['muhammadrizotursunboev8@gmail.com']
-#         )
-#
-#         return render(request, 'blog/contact.html', {"message_name": message_name})
-#
-#     else:
-#         return render(request, 'blog/contact.html', {})
-
-
-# def Register(requests):
-#     return render(requests, 'blog/register.html')
-
-
-# class RegisterUser(DataMixin, CreateView):
-#     form_class = UserCreationForm
-#     template_name = 'blog/register.html'
-#     success_url = reverse_lazy('login')
-#
-#
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         c_def = self.get_user_context(title="Register")
-#         return dict(list(context.items()) + list(c_def.items()))
-#
-#

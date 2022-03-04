@@ -1,37 +1,23 @@
 from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
-
-from django.forms import TextInput, Select, MultipleChoiceField
 
 
 # Login
 class UserLoginForm(AuthenticationForm):
-    email = forms.EmailField(label='E-mail', widget=forms.EmailInput(attrs={'class': 'form-control form'})),
+    name = forms.CharField(label='E-mail', widget=forms.TextInput(attrs={'class': 'form  col-md-2'})),
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control form'})),
 
 
 # Register
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(label='Имя пользователя',
-                               widget=forms.TextInput(attrs={'class': 'input form', 'autocomplete': 'off'})),
-    email = forms.EmailField(label='E-mail', widget=forms.EmailInput(attrs={'class': 'form input'})),
-    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form input'})),
-
-
-# other add blog
-class Meta:
-    model = User
-    fields = ['username', 'email', 'password1', 'password2']
-
-    widgets = {
-        'username': forms.TextInput(attrs={'class': 'form-c ontrol'}),
-        'email': forms.TextInput(attrs={'class': 'form-control'}),
-        'password1': forms.TextInput(attrs={'class': 'form-control'}),
-        'password2': forms.TextInput(attrs={'class': 'form-control'}),
-    }
-
+                               widget=forms.TextInput(attrs={'class': 'input form', 'autocomplete': 'off',
+                                                             'placeholder': "Имя пользователя", })),
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(
+        attrs={'class': 'form  col-md-2', 'placeholder': "Пароль", })),
+    password2 = forms.CharField(label='Повтарите пароль', widget=forms.PasswordInput(
+        attrs={'class': 'form  col-md-2', 'placeholder': "Повтарите пароль", })),
 
 class AddPostForm(forms.ModelForm):
     class Meta:
